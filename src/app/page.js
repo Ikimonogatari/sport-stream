@@ -9,7 +9,7 @@ export default function Home() {
   useEffect(() => {
     const fetchMatches = async () => {
       try {
-        const response = await axios.get("http://13.250.4.241/matches", {
+        const response = await axios.get("https://13.250.4.241/matches", {
           headers: {
             Authorization: `Bearer eyJhbGciOiJIUzI1NiJ9.eyJSb2xlIjoiQWRtaW4iLCJJc3N1ZXIiOiJUdXZzaGluamFyZ2FsIiwiVXNlcm5hbWUiOiJJa2ltb25vIiwiZXhwIjoxNzE2MjEwMjA0LCJpYXQiOjE3MTYyMTAyMDR9.bPq8cTPObKakFg54JGia8-hpcBK0fwMQu8HLffELs1M`,
           },
