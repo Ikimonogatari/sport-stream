@@ -1,6 +1,29 @@
+"use client";
+
 import Image from "next/image";
+import axios from "axios";
+import { useEffect, useState } from "react";
 
 export default function Home() {
+  const [matches, setMatches] = useState([]);
+  useEffect(() => {
+    const fetchMatches = async () => {
+      try {
+        const response = await axios.get("http://localhost:4000/matches", {
+          headers: {
+            Authorization: `Bearer eyJhbGciOiJIUzI1NiJ9.eyJSb2xlIjoiQWRtaW4iLCJJc3N1ZXIiOiJUdXZzaGluamFyZ2FsIiwiVXNlcm5hbWUiOiJJa2ltb25vIiwiZXhwIjoxNzE2MjEwMjA0LCJpYXQiOjE3MTYyMTAyMDR9.bPq8cTPObKakFg54JGia8-hpcBK0fwMQu8HLffELs1M`,
+          },
+        });
+        setMatches(response.data);
+        console.log(response.data);
+      } catch (error) {
+        console.error("Error fetching matches:", error);
+      }
+    };
+
+    fetchMatches();
+  }, []);
+
   return (
     <main className="min-h-screen w-full bg-[#272827] py-10">
       <div className="bg-[#242525] max-7xl container mx-auto py-7 px-3 text-[#b7b3ad]">
@@ -149,150 +172,31 @@ export default function Home() {
                 PC and any other connected device. Backup of reddit nba streams.
               </span>
               <div className="flex flex-col mt-5">
-                <a className="px-4 py-3 w-full flex flex-row justify-between items-center border-y-[1px] border-[#494b49]">
-                  <div className="flex flex-row items-center gap-3">
-                    <Image
-                      src={"/nba_15.svg"}
-                      width={14}
-                      height={14}
-                      alt="sports-d"
-                      className="bg-white"
-                    />
-                    <span>NBA</span>
-                    <span>Oklahoma City Thunder vs New Orleans Pelicans</span>
-                  </div>
-                  <span className="text-sm bg-[#2d2f2f] rounded-full px-3 py-1">
-                    April 19, 2024 , 5:30 PM{" "}
-                  </span>
-                </a>
-                <a className="px-4 py-3 w-full flex flex-row justify-between items-center border-y-[1px] border-[#494b49]">
-                  <div className="flex flex-row items-center gap-3">
-                    <Image
-                      src={"/nba_15.svg"}
-                      width={14}
-                      height={14}
-                      alt="sports-d"
-                      className="bg-white"
-                    />
-                    <span>NBA</span>
-                    <span>Oklahoma City Thunder vs New Orleans Pelicans</span>
-                  </div>
-                  <span className="text-sm bg-[#2d2f2f] rounded-full px-3 py-1">
-                    April 19, 2024 , 5:30 PM{" "}
-                  </span>
-                </a>
-                <a className="px-4 py-3 w-full flex flex-row justify-between items-center border-y-[1px] border-[#494b49]">
-                  <div className="flex flex-row items-center gap-3">
-                    <Image
-                      src={"/nba_15.svg"}
-                      width={14}
-                      height={14}
-                      alt="sports-d"
-                      className="bg-white"
-                    />
-                    <span>NBA</span>
-                    <span>Oklahoma City Thunder vs New Orleans Pelicans</span>
-                  </div>
-                  <span className="text-sm bg-[#2d2f2f] rounded-full px-3 py-1">
-                    April 19, 2024 , 5:30 PM{" "}
-                  </span>
-                </a>
-                <a className="px-4 py-3 w-full flex flex-row justify-between items-center border-y-[1px] border-[#494b49]">
-                  <div className="flex flex-row items-center gap-3">
-                    <Image
-                      src={"/nba_15.svg"}
-                      width={14}
-                      height={14}
-                      alt="sports-d"
-                      className="bg-white"
-                    />
-                    <span>NBA</span>
-                    <span>Oklahoma City Thunder vs New Orleans Pelicans</span>
-                  </div>
-                  <span className="text-sm bg-[#2d2f2f] rounded-full px-3 py-1">
-                    April 19, 2024 , 5:30 PM{" "}
-                  </span>
-                </a>
-                <a className="px-4 py-3 w-full flex flex-row justify-between items-center border-y-[1px] border-[#494b49]">
-                  <div className="flex flex-row items-center gap-3">
-                    <Image
-                      src={"/nba_15.svg"}
-                      width={14}
-                      height={14}
-                      alt="sports-d"
-                      className="bg-white"
-                    />
-                    <span>NBA</span>
-                    <span>Oklahoma City Thunder vs New Orleans Pelicans</span>
-                  </div>
-                  <span className="text-sm bg-[#2d2f2f] rounded-full px-3 py-1">
-                    April 19, 2024 , 5:30 PM{" "}
-                  </span>
-                </a>
-                <a className="px-4 py-3 w-full flex flex-row justify-between items-center border-y-[1px] border-[#494b49]">
-                  <div className="flex flex-row items-center gap-3">
-                    <Image
-                      src={"/nba_15.svg"}
-                      width={14}
-                      height={14}
-                      alt="sports-d"
-                      className="bg-white"
-                    />
-                    <span>NBA</span>
-                    <span>Oklahoma City Thunder vs New Orleans Pelicans</span>
-                  </div>
-                  <span className="text-sm bg-[#2d2f2f] rounded-full px-3 py-1">
-                    April 19, 2024 , 5:30 PM{" "}
-                  </span>
-                </a>
-                <a className="px-4 py-3 w-full flex flex-row justify-between items-center border-y-[1px] border-[#494b49]">
-                  <div className="flex flex-row items-center gap-3">
-                    <Image
-                      src={"/nba_15.svg"}
-                      width={14}
-                      height={14}
-                      alt="sports-d"
-                      className="bg-white"
-                    />
-                    <span>NBA</span>
-                    <span>Oklahoma City Thunder vs New Orleans Pelicans</span>
-                  </div>
-                  <span className="text-sm bg-[#2d2f2f] rounded-full px-3 py-1">
-                    April 19, 2024 , 5:30 PM{" "}
-                  </span>
-                </a>
-                <a className="px-4 py-3 w-full flex flex-row justify-between items-center border-y-[1px] border-[#494b49]">
-                  <div className="flex flex-row items-center gap-3">
-                    <Image
-                      src={"/nba_15.svg"}
-                      width={14}
-                      height={14}
-                      alt="sports-d"
-                      className="bg-white"
-                    />
-                    <span>NBA</span>
-                    <span>Oklahoma City Thunder vs New Orleans Pelicans</span>
-                  </div>
-                  <span className="text-sm bg-[#2d2f2f] rounded-full px-3 py-1">
-                    April 19, 2024 , 5:30 PM{" "}
-                  </span>
-                </a>
-                <a className="px-4 py-3 w-full flex flex-row justify-between items-center border-y-[1px] border-[#494b49]">
-                  <div className="flex flex-row items-center gap-3">
-                    <Image
-                      src={"/nba_15.svg"}
-                      width={14}
-                      height={14}
-                      alt="sports-d"
-                      className="bg-white"
-                    />
-                    <span>NBA</span>
-                    <span>Oklahoma City Thunder vs New Orleans Pelicans</span>
-                  </div>
-                  <span className="text-sm bg-[#2d2f2f] rounded-full px-3 py-1">
-                    April 19, 2024 , 5:30 PM{" "}
-                  </span>
-                </a>
+                {matches.map((m, i) => (
+                  <a
+                    key={i}
+                    target="_blank"
+                    href={m.link}
+                    className="px-4 py-3 w-full flex flex-row justify-between items-center border-y-[1px] border-[#494b49]"
+                  >
+                    <div className="flex flex-row items-center gap-3">
+                      <Image
+                        src={"/nba_15.svg"}
+                        width={14}
+                        height={14}
+                        alt="sports-d"
+                        className="bg-white"
+                      />
+                      <span>NBA</span>
+                      <div className="flex flex-row items-center"></div>
+                      <span>{m.team1name}</span>
+                      vs <span>{m.team2name}</span>
+                    </div>
+                    <span className="text-sm bg-[#2d2f2f] rounded-full px-3 py-1">
+                      {m.datetime}
+                    </span>
+                  </a>
+                ))}
               </div>
             </div>
           </div>
