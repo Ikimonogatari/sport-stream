@@ -22,7 +22,7 @@ const VideoEmbed = () => {
 
   useEffect(() => {
     // Set the cookie
-    document.cookie = "secure; samesite=None";
+    document.cookie = "secure; samesite=None; secure";
   }, []);
 
   const handleVideoInteraction = () => {
@@ -77,9 +77,9 @@ const VideoEmbed = () => {
       <iframe
         loading="lazy"
         sandbox="allow-scripts allow-same-origin allow-popups"
-        referrerpolicy="no-referrer-when-downgrade"
-        // Test with different video source URLs
-        src="https://www.youtube.com/embed/tgbNymZ7vqY" // Replace with your video source URL
+        referrerPolicy="no-referrer-when-downgrade"
+        // Replace with a working video source URL
+        src="https://dlhd.so/embed/stream-343.php"
         frameBorder="0"
         allowFullScreen
         onLoad={handleIframeLoad}
