@@ -7,25 +7,24 @@ const VideoEmbed = () => {
   const [iframeError, setIframeError] = useState(false);
 
   useEffect(() => {
-    // Create a script element
+    // Load the ad script
     const script = document.createElement("script");
     script.src =
       "//pl23855745.highrevenuenetwork.com/e9/f2/47/e9f247537df9c3aafa85c68bb9388491.js";
     script.type = "text/javascript";
     script.async = true;
 
-    // Append the script to the document body
     document.body.appendChild(script);
-
-    // Cleanup the script when the component unmounts
     return () => {
       document.body.removeChild(script);
     };
   }, []);
+
   useEffect(() => {
     // Set the cookie
     document.cookie = "secure; samesite=None";
   }, []);
+
   const handleVideoInteraction = () => {
     if (cooldown) return; // Ignore clicks during cooldown
 
@@ -33,10 +32,9 @@ const VideoEmbed = () => {
       const newCount = prevCount + 1;
 
       if (newCount % 2 === 0) {
-        // Logic to display ads every 2 interactions
+        // Display ad every 2 interactions
         console.log("User interacted, show ad now");
 
-        // Assuming the ad network provides a function to display the ad
         if (typeof window.showAd === "function") {
           window.showAd();
         }
@@ -66,7 +64,7 @@ const VideoEmbed = () => {
 
   return (
     <div
-      onClick={handleVideoInteraction} // Increment click count on each user interaction
+      onClick={handleVideoInteraction}
       style={{
         position: "relative",
         paddingBottom: "56.25%",
@@ -80,8 +78,8 @@ const VideoEmbed = () => {
         loading="lazy"
         sandbox="allow-scripts allow-same-origin allow-popups"
         referrerpolicy="no-referrer-when-downgrade"
-        // src="https://dlhd.so/embed/stream-343.php"
-        src="https://www.youtube.com/embed/tgbNymZ7vqY"
+        // Test with different video source URLs
+        src="https://www.youtube.com/embed/tgbNymZ7vqY" // Replace with your video source URL
         frameBorder="0"
         allowFullScreen
         onLoad={handleIframeLoad}
