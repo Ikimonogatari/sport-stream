@@ -1,6 +1,9 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 const VideoEmbed = () => {
+  const [clickCount, setClickCount] = useState(0);
+  const [cooldown, setCooldown] = useState(false);
+
   useEffect(() => {
     // Create a script element
     const script = document.createElement("script");
@@ -18,15 +21,38 @@ const VideoEmbed = () => {
     };
   }, []);
 
-  // Function to handle video play event
-  const handleVideoPlay = () => {
-    // Logic to display ads when the video starts playing
-    console.log("Video started playing, show ads now");
-    // You can add more logic here if needed
+  // Function to handle video interaction
+  const handleVideoInteraction = () => {
+    if (cooldown) return; // Ignore clicks during cooldown
+
+    setClickCount((prevCount) => {
+      const newCount = prevCount + 1;
+
+      if (newCount % 2 === 0) {
+        // Logic to display ads every 2 interactions
+        console.log("User interacted, show ad now");
+
+        // Assuming the ad network provides a function to display the ad
+        if (typeof window.showAd === "function") {
+          window.showAd();
+        }
+      }
+
+      if (newCount >= 4) {
+        setCooldown(true);
+        setTimeout(() => {
+          setClickCount(0);
+          setCooldown(false);
+        }, 10000);
+      }
+
+      return newCount;
+    });
   };
 
   return (
     <div
+      onClick={handleVideoInteraction} // Increment click count on each user interaction
       style={{
         position: "relative",
         paddingBottom: "56.25%",
@@ -40,7 +66,6 @@ const VideoEmbed = () => {
         src="https://dlhd.so/embed/stream-343.php"
         frameBorder="0"
         allowFullScreen
-        onLoad={handleVideoPlay}
         style={{
           position: "absolute",
           top: 0,
