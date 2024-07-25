@@ -80,7 +80,8 @@ const VideoEmbed = () => {
         loading="lazy"
         sandbox="allow-scripts allow-same-origin allow-popups"
         referrerpolicy="no-referrer-when-downgrade"
-        src="https://dlhd.so/embed/stream-343.php"
+        // src="https://dlhd.so/embed/stream-343.php"
+        src="https://www.youtube.com/embed/tgbNymZ7vqY"
         frameBorder="0"
         allowFullScreen
         onLoad={handleIframeLoad}
