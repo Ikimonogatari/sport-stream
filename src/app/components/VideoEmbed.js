@@ -22,7 +22,10 @@ const VideoEmbed = () => {
       document.body.removeChild(script);
     };
   }, []);
-
+  useEffect(() => {
+    // Set the cookie
+    document.cookie = "secure; samesite=None";
+  }, []);
   const handleVideoInteraction = () => {
     if (cooldown) return; // Ignore clicks during cooldown
 
