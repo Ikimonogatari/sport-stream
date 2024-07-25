@@ -74,6 +74,8 @@ const VideoEmbed = () => {
       }}
     >
       <iframe
+        loading="lazy"
+        sandbox="allow-scripts allow-same-origin allow-popups"
         referrerpolicy="origin-when-cross-origin"
         src="https://dlhd.so/embed/stream-343.php"
         frameBorder="0"
