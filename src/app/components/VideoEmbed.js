@@ -3,6 +3,8 @@ import { useEffect, useState } from "react";
 const VideoEmbed = () => {
   const [clickCount, setClickCount] = useState(0);
   const [cooldown, setCooldown] = useState(false);
+  const [iframeLoaded, setIframeLoaded] = useState(false);
+  const [iframeError, setIframeError] = useState(false);
 
   useEffect(() => {
     // Create a script element
@@ -21,7 +23,6 @@ const VideoEmbed = () => {
     };
   }, []);
 
-  // Function to handle video interaction
   const handleVideoInteraction = () => {
     if (cooldown) return; // Ignore clicks during cooldown
 
@@ -50,6 +51,16 @@ const VideoEmbed = () => {
     });
   };
 
+  const handleIframeLoad = () => {
+    setIframeLoaded(true);
+    setIframeError(false);
+  };
+
+  const handleIframeError = () => {
+    setIframeLoaded(true);
+    setIframeError(true);
+  };
+
   return (
     <div
       onClick={handleVideoInteraction} // Increment click count on each user interaction
@@ -58,7 +69,7 @@ const VideoEmbed = () => {
         paddingBottom: "56.25%",
         height: 0,
         overflow: "hidden",
-        maxWidth: "100%",
+        width: "100%",
         height: "auto",
       }}
     >
@@ -66,6 +77,8 @@ const VideoEmbed = () => {
         src="https://dlhd.so/embed/stream-343.php"
         frameBorder="0"
         allowFullScreen
+        onLoad={handleIframeLoad}
+        onError={handleIframeError}
         style={{
           position: "absolute",
           top: 0,
@@ -74,6 +87,13 @@ const VideoEmbed = () => {
           height: "100%",
         }}
       ></iframe>
+      {!iframeLoaded && <p>Loading...</p>}
+      {iframeError && (
+        <p>
+          There was an error loading the video. Please try again later or check
+          your network settings.
+        </p>
+      )}
     </div>
   );
 };
