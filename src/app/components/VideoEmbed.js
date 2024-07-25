@@ -74,6 +74,7 @@ const VideoEmbed = () => {
       }}
     >
       <iframe
+        referrerpolicy="origin-when-cross-origin"
         src="https://dlhd.so/embed/stream-343.php"
         frameBorder="0"
         allowFullScreen
