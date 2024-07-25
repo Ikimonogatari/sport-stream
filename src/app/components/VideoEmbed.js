@@ -54,15 +54,15 @@ const VideoEmbed = () => {
     });
   };
 
-  // const handleIframeLoad = () => {
-  //   setIframeLoaded(true);
-  //   setIframeError(false);
-  // };
+  const handleIframeLoad = () => {
+    setIframeLoaded(true);
+    setIframeError(false);
+  };
 
-  // const handleIframeError = () => {
-  //   setIframeLoaded(true);
-  //   setIframeError(true);
-  // };
+  const handleIframeError = () => {
+    setIframeLoaded(true);
+    setIframeError(true);
+  };
 
   return (
     <div
@@ -79,12 +79,12 @@ const VideoEmbed = () => {
       <iframe
         loading="lazy"
         sandbox="allow-scripts allow-same-origin allow-popups"
-        referrerpolicy="origin-when-cross-origin"
+        referrerpolicy="no-referrer-when-downgrade"
         src="https://dlhd.so/embed/stream-343.php"
         frameBorder="0"
         allowFullScreen
-        // onLoad={}
-        onError={() => setIframeError(true)}
+        onLoad={handleIframeLoad}
+        onError={handleIframeError}
         style={{
           position: "absolute",
           top: 0,
@@ -93,7 +93,7 @@ const VideoEmbed = () => {
           height: "100%",
         }}
       ></iframe>
-      {/* {!iframeLoaded && <p>Loading...</p>} */}
+      {!iframeLoaded && <p>Loading...</p>}
       {iframeError && (
         <p>
           There was an error loading the video. Please try again later or check
