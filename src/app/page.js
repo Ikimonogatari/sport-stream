@@ -31,8 +31,8 @@ export default function Home() {
         <span className=" border-b-[1px] border-[#b7b3ad] w-full">
           Your current time zone: 09:10 (UTC)
         </span>
-        <div className="flex flex-row mt-7">
-          <div className="flex flex-col max-w-[310px] border-r-[1px] border-[#42524d] w-full px-3">
+        <div className="flex flex-col lg:flex-row gap-10 lg:gap-0 mt-7">
+          <div className="flex flex-col lg:max-w-[310px] border-r-[1px] border-[#42524d] w-full px-3">
             <div className="bg-[#20926d] px-3 py-1">
               <span className="text-white">Choose Sport / Reddit Links</span>
             </div>
