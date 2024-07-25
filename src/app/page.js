@@ -3,6 +3,7 @@
 import Image from "next/image";
 import axios from "axios";
 import { useEffect, useState } from "react";
+import VideoEmbed from "./components/VideoEmbed";
 
 export default function Home() {
   const [matches, setMatches] = useState([]);
@@ -198,6 +199,7 @@ export default function Home() {
                   </a>
                 ))}
               </div>
+              <VideoEmbed />
             </div>
           </div>
         </div>
