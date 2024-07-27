@@ -72,11 +72,16 @@ const VideoEmbed = ({ src }) => {
         height: "auto",
       }}
     >
+      <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1"
+      ></meta>
+
       <iframe
         loading="lazy"
         sandbox="allow-scripts allow-same-origin allow-popups"
         referrerPolicy="no-referrer-when-downgrade"
-        // Replace with a working video source URL
+        // Use proxied URL for iframe source
         src={src}
         frameBorder="0"
         allowFullScreen
@@ -90,7 +95,7 @@ const VideoEmbed = ({ src }) => {
           height: "100%",
         }}
       ></iframe>
-      {!iframeLoaded && <p>Loading...</p>}
+
       {iframeError && (
         <p>
           There was an error loading the video. Please try again later or check
