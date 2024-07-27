@@ -38,7 +38,7 @@ export default function MatchDetail() {
           {sources.map((source, index) => (
             <a
               key={index}
-              href={`/player?source=${encodeURIComponent(source.link)}`}
+              href={`/player/${encodeURIComponent(source.link)}`}
               className="px-4 py-2 min-w-[97px] bg-[#2d2f2f] hover:bg-[#a4a19c] hover:text-black transition-all duration-150 rounded-3xl"
             >
               Source {index + 1}
