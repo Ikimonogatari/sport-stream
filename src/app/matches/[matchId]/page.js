@@ -4,7 +4,6 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 
 export default function MatchDetail() {
-  const router = useRouter();
   const params = useParams();
   const { matchId } = params; // assuming the URL parameter is named 'plan'
   const [sources, setSources] = useState(null);
