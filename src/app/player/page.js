@@ -1,7 +1,7 @@
 "use client";
 
 import { useRouter, useSearchParams } from "next/navigation";
-import { Suspense } from "react";
+
 import ReactPlayer from "react-player";
 import { useEffect, useState, Suspense } from "react";
 import VideoEmbed from "../components/VideoEmbed";
