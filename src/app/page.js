@@ -61,6 +61,11 @@ export default function Home() {
               ))}
             </div>
           </div>
+          <VideoEmbed
+            src={
+              "https://1stream.eu/title-game/olympic-paris-2024/cnbc-live-stream/9285?embed=1"
+            }
+          />
           <div className="flex flex-col w-full px-3">
             <div className="bg-[#20926d] px-3 py-1">
               <span className="text-white"> {category} Matches </span>

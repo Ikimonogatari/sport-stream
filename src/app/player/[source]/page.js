@@ -15,7 +15,20 @@ export default function Player() {
     <main className="min-h-screen w-full bg-[#272827] py-10">
       <div className="bg-[#242525] max-7xl container mx-auto py-7 px-3 text-[#a4a19c]">
         <div className="flex justify-center">
-          <ReactPlayer url={decodeURIComponent(source)} />
+          <ReactPlayer
+            url={decodeURIComponent(source)}
+            controls
+            // width="100%"
+            // height="100%"
+            config={{
+              file: {
+                attributes: {
+                  controlsList: "nodownload",
+                  autoPlay: true,
+                },
+              },
+            }}
+          />
           {/* <VideoEmbed src={decodeURIComponent(source)} /> */}
         </div>
       </div>
