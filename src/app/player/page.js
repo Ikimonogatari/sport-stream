@@ -1,7 +1,8 @@
 "use client";
+
 import { useRouter, useSearchParams } from "next/navigation";
 import ReactPlayer from "react-player";
-import { useEffect, useState } from "react";
+import { useEffect, useState, Suspense } from "react";
 import VideoEmbed from "../components/VideoEmbed";
 
 export default function Player() {
@@ -23,15 +24,15 @@ export default function Player() {
   }
 
   return (
-    <main className="min-h-screen w-full bg-[#272827] py-10">
-      <div className="bg-[#242525] max-7xl container mx-auto py-7 px-3 text-[#a4a19c]">
-        {/* <div className="flex justify-center">
-          <ReactPlayer url={source} controls={true} />
-        </div> */}
-        <div className="flex justify-center">
-          <VideoEmbed src={source} />
+    <Suspense fallback={<div>Loading video...</div>}>
+      <main className="min-h-screen w-full bg-[#272827] py-10">
+        <div className="bg-[#242525] max-7xl container mx-auto py-7 px-3 text-[#a4a19c]">
+          <div className="flex justify-center">
+            {/* <ReactPlayer url={source} controls={true} /> */}
+            <VideoEmbed src={source} />
+          </div>
         </div>
-      </div>
-    </main>
+      </main>
+    </Suspense>
   );
 }
