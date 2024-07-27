@@ -1,13 +1,12 @@
 import { useEffect, useState } from "react";
 
-const VideoEmbed = () => {
+const VideoEmbed = ({ src }) => {
   const [clickCount, setClickCount] = useState(0);
   const [cooldown, setCooldown] = useState(false);
   const [iframeLoaded, setIframeLoaded] = useState(false);
   const [iframeError, setIframeError] = useState(false);
 
   useEffect(() => {
-    // Load the ad script
     const script = document.createElement("script");
     script.src =
       "//pl23855745.highrevenuenetwork.com/e9/f2/47/e9f247537df9c3aafa85c68bb9388491.js";
@@ -21,7 +20,6 @@ const VideoEmbed = () => {
   }, []);
 
   useEffect(() => {
-    // Set the cookie
     document.cookie = "secure; samesite=None; secure";
   }, []);
 
@@ -79,7 +77,7 @@ const VideoEmbed = () => {
         sandbox="allow-scripts allow-same-origin allow-popups"
         referrerPolicy="no-referrer-when-downgrade"
         // Replace with a working video source URL
-        src="https://dlhd.so/embed/stream-343.php"
+        src={src}
         frameBorder="0"
         allowFullScreen
         onLoad={handleIframeLoad}
