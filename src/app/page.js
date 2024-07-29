@@ -6,8 +6,10 @@ import { useEffect, useState } from "react";
 import VideoEmbed from "./components/VideoEmbed";
 
 export default function Home() {
-  const [matches, setMatches] = useState([]);
-  const [category, setCategory] = useState("Basketball");
+  const [matches, setMatches] = useState(null);
+  const [error, setError] = useState(false);
+  const [category, setCategory] = useState("Soccer");
+  const [leagues, setLeagues] = useState(null);
 
   useEffect(() => {
     const fetchMatches = async () => {
@@ -20,12 +22,27 @@ export default function Home() {
             },
           }
         );
-        setMatches(response.data);
+        // Sort the matches by datetime in descending order
+        const sortedMatches = response.data.sort(
+          (a, b) => new Date(a.datetime) - new Date(b.datetime)
+        );
+        setMatches(sortedMatches);
       } catch (error) {
         console.error("Error fetching matches:", error);
+        setError(true);
       }
     };
 
+    const fetchLeagues = async () => {
+      try {
+        const response = await axios.get(`http://localhost:4000/leagues`);
+
+        setLeagues(response.data);
+      } catch (error) {
+        console.error("Error fetching leagues:", error);
+      }
+    };
+    fetchLeagues();
     fetchMatches();
   }, [category]);
 
@@ -48,7 +65,7 @@ export default function Home() {
                 <div
                   key={cat.name}
                   className="rounded-sm flex justify-center items-center px-1 py-2 bg-[#20926d] cursor-pointer"
-                  onClick={() => setCategory(cat.name)}
+                  onClick={() => (setCategory(cat.name), setError(false))}
                 >
                   <Image
                     src={cat.icon}
@@ -60,14 +77,24 @@ export default function Home() {
                 </div>
               ))}
             </div>
+            <div className="flex flex-col px-3 mt-3">
+              {leagues ? (
+                leagues.map((l, i) => (
+                  <div
+                    onClick={() => (setCategory(l.name), setError(false))}
+                    className="cursor-pointer text-sm text-pretty p-2 border-t-[1px] border-[#494b49]"
+                    key={i}
+                  >
+                    {l.name}
+                  </div>
+                ))
+              ) : (
+                <></>
+              )}
+            </div>
           </div>
 
           <div className="flex flex-col w-full px-3">
-            <VideoEmbed
-              src={
-                "https://1stream.eu/title-game/olympic-paris-2024/cnbc-live-stream/9285?embed=1"
-              }
-            />
             <div className="bg-[#20926d] px-3 py-1">
               <span className="text-white"> {category} Matches </span>
             </div>
@@ -81,45 +108,59 @@ export default function Home() {
                 smartphone, tablet, PC and any other connected device.
               </span>
               <div className="flex flex-col mt-5">
-                {matches.map((m, i) => (
-                  <a
-                    key={i}
-                    target="_blank"
-                    href={`/matches/${m.id}`}
-                    className="px-4 py-3 w-full flex flex-col gap-1 md:gap-0 md:flex-row justify-between md:items-center border-y-[1px] border-[#494b49]"
-                  >
-                    <div className="flex flex-row items-center justify-between md:justify-start gap-1 sm:gap-3">
-                      <div className="flex flex-row items-center gap-1 sm:gap-3">
-                        <Image
-                          src={"/basketball.svg"}
-                          width={14}
-                          height={14}
-                          alt="sports-d"
-                          className="w-[10px] h-[10px] mt-[2px] sm:mt-0 sm:w-[14px] sm:h-[14px]"
-                        />
-                        <span className="text-sm sm:text-base">
-                          {m.team1name}
-                        </span>
-                      </div>
-                      {m.isLive && (
-                        <span className="block md:hidden text-[8px] sm:text-sm bg-red-600 text-white rounded-full px-[6px] sm:px-3 pb-1">
-                          Live
-                        </span>
-                      )}
-                    </div>
+                {!error ? (
+                  !matches ? (
+                    <>Loading...</>
+                  ) : (
+                    matches.map((m, i) => (
+                      <a
+                        key={i}
+                        target="_blank"
+                        href={`/matches/${m.id}`}
+                        className="px-4 py-3 w-full flex flex-col gap-1 md:gap-0 md:flex-row justify-between md:items-center border-y-[1px] border-[#494b49]"
+                      >
+                        <div className="flex flex-row items-center justify-between md:justify-start gap-1 sm:gap-3">
+                          <div className="flex flex-row items-center gap-[10px] sm:gap-3">
+                            <Image
+                              src={"/basketball.svg"}
+                              width={14}
+                              height={14}
+                              alt="sports-d"
+                              className="w-[10px] h-[10px] mt-[2px] sm:mt-0 sm:w-[14px] sm:h-[14px]"
+                            />
+                            <div className="flex flex-col xl:flex-row xl:items-center gap-1 xl:gap-3">
+                              <span className="text-sm sm:text-base">
+                                {m.team1name}
+                              </span>
 
-                    <div className="flex flex-row items-center gap-3">
-                      {m.isLive && (
-                        <span className="text-sm hidden md:block bg-red-600 text-white rounded-full px-3 pb-1">
-                          Live
-                        </span>
-                      )}
-                      <span className="text-sm bg-[#2d2f2f] rounded-full px-3 py-1">
-                        {m.datetime}
-                      </span>
-                    </div>
-                  </a>
-                ))}
+                              <span className="text-[10px] sm:text-xs md:text-base">
+                                ({m.description})
+                              </span>
+                            </div>
+                          </div>
+                          {m.isLive && (
+                            <span className="block md:hidden text-[8px] sm:text-sm bg-red-600 text-white rounded-full px-[6px] sm:px-3 pb-1">
+                              Live
+                            </span>
+                          )}
+                        </div>
+
+                        <div className="flex flex-row items-center gap-3">
+                          {m.isLive && (
+                            <span className="text-sm hidden md:block bg-red-600 text-white rounded-full px-3 pb-1">
+                              Live
+                            </span>
+                          )}
+                          <span className="text-[10px] sm:text-xs md:text-sm bg-[#2d2f2f] rounded-full px-3 py-1">
+                            {m.datetime}
+                          </span>
+                        </div>
+                      </a>
+                    ))
+                  )
+                ) : (
+                  <>No matches found</>
+                )}
               </div>
             </div>
           </div>
