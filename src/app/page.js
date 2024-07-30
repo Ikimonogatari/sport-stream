@@ -3,7 +3,6 @@
 import Image from "next/image";
 import axios from "axios";
 import { useEffect, useState } from "react";
-import VideoEmbed from "./components/VideoEmbed";
 
 export default function Home() {
   const [matches, setMatches] = useState(null);
@@ -14,15 +13,10 @@ export default function Home() {
   useEffect(() => {
     const fetchMatches = async () => {
       try {
-        const response = await axios.get(
-          `${process.env.NEXT_PUBLIC_API_BASE_URL}/matches/by-league`,
-          {
-            params: {
-              league_name: category,
-            },
-          }
-        );
-        // Sort the matches by datetime in descending order
+        const response = await axios.get(`/api/proxy/matches/by-league`, {
+          params: { league_name: category },
+        });
+        console.log(response);
         const sortedMatches = response.data.sort(
           (a, b) => new Date(a.datetime) - new Date(b.datetime)
         );
@@ -35,15 +29,14 @@ export default function Home() {
 
     const fetchLeagues = async () => {
       try {
-        const response = await axios.get(
-          `${process.env.NEXT_PUBLIC_API_BASE_URL}/leagues`
-        );
-
+        const response = await axios.get(`/api/proxy/leagues`);
         setLeagues(response.data);
+        console.log(response);
       } catch (error) {
         console.error("Error fetching leagues:", error);
       }
     };
+
     fetchLeagues();
     fetchMatches();
   }, [category]);

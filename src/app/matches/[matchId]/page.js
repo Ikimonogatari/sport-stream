@@ -1,42 +1,38 @@
 "use client";
-import { useParams, useRouter } from "next/navigation";
+import { useParams } from "next/navigation";
 import axios from "axios";
 import { useEffect, useState } from "react";
 
 export default function MatchDetail() {
   const params = useParams();
-  const { matchId } = params; // assuming the URL parameter is named 'plan'
-  const [sources, setSources] = useState(null);
+  const { matchId } = params; // Get matchId from URL parameters
+  const [sources, setSources] = useState([]);
   const [error, setError] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    if (matchId) {
-      const fetchMatch = async () => {
-        try {
-          const response = await axios.get(
-            `${process.env.NEXT_PUBLIC_API_BASE_URL}/matches/${matchId}/stream_sources`
-          );
-          setSources(response.data);
-          console.log(response.data);
-        } catch (error) {
-          console.error("Error fetching match:", error);
-          setError(true);
-        }
-      };
+    const fetchMatch = async () => {
+      if (!matchId) return; // Exit early if no matchId
 
-      fetchMatch();
-    }
+      try {
+        setLoading(true);
+        const response = await axios.get(
+          `/api/proxy/matches/${matchId}/stream_sources`
+        );
+        setSources(response.data);
+        console.log(response.data);
+      } catch (error) {
+        console.error("Error fetching match:", error);
+        setError(true);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchMatch();
   }, [matchId]);
 
-  if (error) {
-    return (
-      <div className="min-h-screen w-full bg-[#272827] py-10">
-        <div className="bg-[#242525] max-7xl container mx-auto py-7 px-7 text-lg text-[#a4a19c]">
-          No sources found
-        </div>
-      </div>
-    );
-  } else if (!error && !sources) {
+  if (loading) {
     return (
       <div className="min-h-screen w-full bg-[#272827] py-10">
         <div className="bg-[#242525] max-7xl container mx-auto py-7 px-7 text-lg text-[#a4a19c]">
@@ -46,11 +42,21 @@ export default function MatchDetail() {
     );
   }
 
+  if (error) {
+    return (
+      <div className="min-h-screen w-full bg-[#272827] py-10">
+        <div className="bg-[#242525] max-7xl container mx-auto py-7 px-7 text-lg text-[#a4a19c]">
+          No sources found
+        </div>
+      </div>
+    );
+  }
+
   return (
     <main className="min-h-screen w-full bg-[#272827] py-10">
       <div className="bg-[#242525] max-7xl container mx-auto py-7 px-7 text-[#a4a19c]">
         <div className="flex flex-wrap flex-row gap-3">
-          {sources.length !== 0 ? (
+          {sources.length > 0 ? (
             sources.map((source, index) => (
               <a
                 key={index}
