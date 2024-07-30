@@ -112,17 +112,17 @@ export default function Home() {
                         key={i}
                         target="_blank"
                         href={`/matches/${m.id}`}
-                        className="px-4 py-3 w-full flex flex-col gap-1 md:gap-0 md:flex-row justify-between md:items-center border-y-[1px] border-[#494b49]"
+                        className="px-4 py-3 w-full flex flex-col gap-1 2xl:gap-0 2xl:flex-row justify-between 2xl:items-center border-y-[1px] border-[#494b49]"
                       >
-                        <div className="flex flex-row items-center justify-between md:justify-start gap-1 sm:gap-3">
+                        <div className="flex flex-row items-center justify-between 2xl:justify-start gap-1 sm:gap-3">
                           <div className="flex flex-row items-center gap-[10px] sm:gap-3">
-                            <Image
+                            {/* <Image
                               src={"/basketball.svg"}
                               width={14}
                               height={14}
                               alt="sports-d"
                               className="w-[10px] h-[10px] mt-[2px] sm:mt-0 sm:w-[14px] sm:h-[14px]"
-                            />
+                            /> */}
                             <div className="flex flex-col xl:flex-row xl:items-center gap-1 xl:gap-3">
                               <span className="text-sm sm:text-base">
                                 {m.team1name}
@@ -134,7 +134,7 @@ export default function Home() {
                             </div>
                           </div>
                           {m.isLive && (
-                            <span className="block md:hidden text-[8px] sm:text-sm bg-red-600 text-white rounded-full px-[6px] sm:px-3 pb-1">
+                            <span className="block 2xl:hidden text-[8px] sm:text-sm bg-red-600 text-white rounded-full px-[6px] sm:px-3 pb-1">
                               Live
                             </span>
                           )}
@@ -142,7 +142,7 @@ export default function Home() {
 
                         <div className="flex flex-row items-center gap-3">
                           {m.isLive && (
-                            <span className="text-sm hidden md:block bg-red-600 text-white rounded-full px-3 pb-1">
+                            <span className="text-sm hidden 2xl:block bg-red-600 text-white rounded-full px-3 pb-1">
                               Live
                             </span>
                           )}
