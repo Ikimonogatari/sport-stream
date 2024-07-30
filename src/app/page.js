@@ -15,7 +15,7 @@ export default function Home() {
     const fetchMatches = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:4000/matches/by-league`,
+          `${process.env.NEXT_PUBLIC_API_BASE_URL}/matches/by-league`,
           {
             params: {
               league_name: category,
@@ -35,7 +35,9 @@ export default function Home() {
 
     const fetchLeagues = async () => {
       try {
-        const response = await axios.get(`http://localhost:4000/leagues`);
+        const response = await axios.get(
+          `${process.env.NEXT_PUBLIC_API_BASE_URL}/leagues`
+        );
 
         setLeagues(response.data);
       } catch (error) {

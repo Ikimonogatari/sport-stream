@@ -14,7 +14,7 @@ export default function MatchDetail() {
       const fetchMatch = async () => {
         try {
           const response = await axios.get(
-            `http://localhost:4000/matches/${matchId}/stream_sources`
+            `${process.env.NEXT_PUBLIC_API_BASE_URL}/matches/${matchId}/stream_sources`
           );
           setSources(response.data);
           console.log(response.data);
