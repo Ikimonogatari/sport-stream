@@ -13,7 +13,6 @@ export default function MatchDetail() {
   useEffect(() => {
     const fetchMatch = async () => {
       if (!matchId) return; // Exit early if no matchId
-
       try {
         setLoading(true);
         const response = await axios.get(
