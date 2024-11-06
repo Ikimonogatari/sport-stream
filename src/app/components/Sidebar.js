@@ -1,10 +1,11 @@
-// components/Sidebar.js
 import Link from "next/link";
 import Image from "next/image";
 
-export default function Sidebar({ categories, leagues }) {
+export default function Sidebar({ categories, leagues, className }) {
   return (
-    <div className="flex flex-col lg:max-w-[310px] border-r-[1px] border-[#42524d] w-full px-3">
+    <div
+      className={`flex flex-col ${className} border-r-[1px] border-[#42524d] px-3`}
+    >
       <div className="bg-[#20926d] px-3 py-1">
         <span className="text-white">Спортын төрлүүд</span>
       </div>

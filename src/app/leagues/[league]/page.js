@@ -108,8 +108,8 @@ export default function LeaguePage() {
           </span>
           <span className="text-xs md:text-sm">
             {sportsTranslations[decodedLeague] || decodedLeague}-н тоглолтуудыг
-            шууд хүлээн авч үзээрэй. Тоглолт бүрд олон стримийн эх сурвалж санал
-            болгодог ба өөрийн дуртай багийг цаг алдалгүй дэмжээрэй.
+            шууд хүлээн авч үзээрэй. Бид тоглолт бүрд олон стримийн эх сурвалж
+            санал болгодог ба өөрийн дуртай багийг цаг алдалгүй дэмжээрэй.
           </span>
           <div className="flex flex-col mt-5">
             {!error ? (

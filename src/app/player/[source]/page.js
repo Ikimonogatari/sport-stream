@@ -1,5 +1,4 @@
 "use client";
-import ReactPlayer from "react-player";
 import { useParams } from "next/navigation";
 import VideoEmbed from "@/app/components/VideoEmbed";
 
