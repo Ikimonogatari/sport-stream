@@ -3,15 +3,18 @@ import { useParams } from "next/navigation";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import MatchListLayout from "@/app/components/MatchListLayout";
+import Image from "next/image";
 
 export default function LeaguePage() {
   const params = useParams();
   const { league } = params;
   const [matches, setMatches] = useState(null);
+  const [filteredMatches, setFilteredMatches] = useState(null); // State to hold filtered matches
   const [error, setError] = useState(false);
-  console.log(league);
+  const [searchQuery, setSearchQuery] = useState(""); // State for search query
+
   const decodedLeague = league ? decodeURIComponent(league) : "";
-  console.log(decodedLeague);
+
   useEffect(() => {
     if (!decodedLeague) return;
 
@@ -24,6 +27,7 @@ export default function LeaguePage() {
           (a, b) => new Date(a.datetime) - new Date(b.datetime)
         );
         setMatches(sortedMatches);
+        setFilteredMatches(sortedMatches); // Set all matches initially
       } catch (error) {
         console.error("Error fetching matches:", error);
         setError(true);
@@ -33,14 +37,13 @@ export default function LeaguePage() {
     fetchMatches();
   }, [decodedLeague]);
 
+  // Function to format date in Mongolian
   function formatShortDateToMongolian(dateString) {
-    // Parse the date string into a Date object (UTC)
     const date = new Date(dateString);
     date.setHours(date.getHours() - 8);
-    // Format the date to Mongolia's timezone (Asia/Ulaanbaatar)
     const options = {
       timeZone: "Asia/Ulaanbaatar",
-      hour12: false, // 24-hour format
+      hour12: false,
       weekday: "short",
       year: "numeric",
       month: "2-digit",
@@ -50,12 +53,8 @@ export default function LeaguePage() {
     };
 
     const formatter = new Intl.DateTimeFormat("en-US", options);
-    const formattedDate = formatter.format(date); // Formatted like "Thu, 11/07/2024, 04:00"
+    const formattedDate = formatter.format(date);
 
-    // Log the formatted date for debugging
-    console.log("Formatted Date:", formattedDate);
-
-    // Adjusted regex to match "Thu, 11/07/2024, 04:00"
     const regex = /^([A-Za-z]+), (\d{2})\/(\d{2})\/(\d{4}), (\d{2}):(\d{2})$/;
     const match = formattedDate.match(regex);
 
@@ -82,41 +81,67 @@ export default function LeaguePage() {
 
     const weekdays = ["Даваа", "Мягмар", "Лхагва", "Пүрэв", "Бямба", "Ням"];
 
-    // Map month and weekday to Mongolian
-    const monthMongolian = months[parseInt(month) - 1]; // Convert from 0-indexed
+    const monthMongolian = months[parseInt(month) - 1];
     const weekdayMongolian =
       weekdays[
         ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"].indexOf(weekday)
       ];
 
-    // Return the final formatted date in Mongolian
     return `${monthMongolian} ${day}, ${weekdayMongolian} ${hour}:${minute}`;
   }
+
+  // Update filtered matches based on search query
+  const handleSearch = (query) => {
+    setSearchQuery(query);
+    const filtered = matches?.filter((match) => {
+      const searchLower = query.toLowerCase();
+      return (
+        match.team1name.toLowerCase().includes(searchLower) ||
+        match.team2name.toLowerCase().includes(searchLower) ||
+        match.description?.toLowerCase().includes(searchLower) ||
+        match.datetime.includes(searchLower)
+      );
+    });
+    setFilteredMatches(filtered);
+  };
 
   return (
     <MatchListLayout>
       <div className="flex flex-col w-full px-3">
         <div className="bg-[#20926d] px-3 py-1">
-          <span className="text-white">
+          <span className="text-white text-lg font-semibold">
             {sportsTranslations[decodedLeague] || decodedLeague}
           </span>
         </div>
+
         <div className="flex flex-col p-3 gap-3">
-          <span className="text-base sm:text-xl md:text-2xl">
-            Тоглолтуудын хуваарь -{" "}
-            {sportsTranslations[decodedLeague] || decodedLeague}
-          </span>
           <span className="text-xs md:text-sm">
             {sportsTranslations[decodedLeague] || decodedLeague}-н тоглолтуудыг
             шууд хүлээн авч үзээрэй. Бид тоглолт бүрд олон стримийн эх сурвалж
             санал болгодог ба өөрийн дуртай багийг цаг алдалгүй дэмжээрэй.
           </span>
+          <div className="flex flex-row items-center p-3 mt-4 gap-2 text-sm border border-white/30  rounded-md bg-inherit">
+            <Image
+              src={"/search-icon.png"}
+              alt=""
+              width={20}
+              height={20}
+              className="w-5 h-5"
+            />
+            <input
+              type="text"
+              value={searchQuery}
+              onChange={(e) => handleSearch(e.target.value)}
+              placeholder="Хайх"
+              className="outline-none bg-inherit"
+            />
+          </div>
           <div className="flex flex-col mt-5">
             {!error ? (
-              !matches ? (
-                <>Loading...</>
+              filteredMatches?.length === 0 ? (
+                <>Тоглолт олдсонгүй</>
               ) : (
-                matches.map((m, i) => (
+                filteredMatches?.map((m, i) => (
                   <a
                     key={i}
                     target="_blank"
@@ -156,7 +181,7 @@ export default function LeaguePage() {
                 ))
               )
             ) : (
-              <>No matches found</>
+              <>Тоглолт олдсонгүй</>
             )}
           </div>
         </div>
