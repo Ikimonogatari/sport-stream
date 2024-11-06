@@ -6,6 +6,7 @@ import Footer from "./components/Footer";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import Sidebar from "./components/Sidebar";
+import { Helmet } from "react-helmet";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -49,6 +50,9 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={`${inter.className} w-full h-full`}>
+        <Helmet>
+          <title>SportStream - Спортын шууд дамжуулалт</title>
+        </Helmet>
         <Navbar toggleSidebar={toggleSidebar} />
         <div className="flex flex-row min-h-screen">
           <Sidebar
