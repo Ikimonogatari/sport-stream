@@ -10,13 +10,15 @@ export default function LeaguePage() {
   const [matches, setMatches] = useState(null);
   const [error, setError] = useState(false);
   console.log(league);
+  const decodedLeague = league ? decodeURIComponent(league) : "";
+  console.log(decodedLeague);
   useEffect(() => {
-    if (!league) return;
+    if (!decodedLeague) return;
 
     const fetchMatches = async () => {
       try {
         const response = await axios.get(`/api/proxy/matches/by-league`, {
-          params: { league_name: league },
+          params: { league_name: decodedLeague },
         });
         const sortedMatches = response.data.sort(
           (a, b) => new Date(a.datetime) - new Date(b.datetime)
@@ -29,22 +31,22 @@ export default function LeaguePage() {
     };
 
     fetchMatches();
-  }, [league]);
+  }, [decodedLeague]);
 
   return (
     <MatchListLayout>
       <div className="flex flex-col w-full px-3">
         <div className="bg-[#20926d] px-3 py-1">
-          <span className="text-white"> {league} Matches </span>
+          <span className="text-white"> {decodedLeague} Matches </span>
         </div>
         <div className="flex flex-col p-3 gap-3">
           <span className="text-base sm:text-xl md:text-2xl">
-            {league} streams schedule
+            {decodedLeague} streams schedule
           </span>
           <span className="text-xs md:text-sm">
-            Watch {league} games live, we offer multiple streams for every live
-            game. Follow your favorite {league} team on your smartphone, tablet,
-            PC and any other connected device.
+            Watch {decodedLeague} games live, we offer multiple streams for
+            every live game. Follow your favorite {decodedLeague} team on your
+            smartphone, tablet, PC and any other connected device.
           </span>
           <div className="flex flex-col mt-5">
             {!error ? (
