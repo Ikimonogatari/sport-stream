@@ -1,7 +1,12 @@
 import Link from "next/link";
 import Image from "next/image";
 
-export default function Sidebar({ categories, leagues, className }) {
+export default function Sidebar({
+  categories,
+  leagues,
+  className,
+  toggleSidebar,
+}) {
   return (
     <div
       className={`flex flex-col ${className} border-r-[1px] border-[#42524d] px-3`}
@@ -12,6 +17,7 @@ export default function Sidebar({ categories, leagues, className }) {
       <div className="grid grid-cols-3 gap-3 p-3">
         {categories.map((cat) => (
           <Link
+            onClick={toggleSidebar}
             href={`/leagues/${cat.name}`}
             key={cat.name}
             className="rounded-sm flex justify-center items-center px-1 py-2 bg-[#20926d] cursor-pointer"
@@ -23,6 +29,7 @@ export default function Sidebar({ categories, leagues, className }) {
       <div className="flex flex-col px-3 mt-3">
         {leagues?.map((league, i) => (
           <div
+            onClick={toggleSidebar}
             key={i}
             className="cursor-pointer text-sm p-2 border-t-[1px] border-[#494b49]"
           >

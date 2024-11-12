@@ -59,6 +59,7 @@ export default function RootLayout({ children }) {
             className={`absolute md:hidden w-full z-50 bg-[#242525] mt-4 transition-transform duration-300 ease-in-out ${
               sidebarOpen ? "translate-x-0" : "-translate-x-full"
             }`}
+            toggleSidebar={toggleSidebar}
             categories={categories}
             leagues={leagues}
           />
