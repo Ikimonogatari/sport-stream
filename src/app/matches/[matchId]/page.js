@@ -54,12 +54,12 @@ export default function MatchDetail() {
   return (
     <main className="min-h-screen w-full bg-[#272827] py-10">
       <div className="bg-[#242525] max-7xl container mx-auto py-7 px-7 text-[#a4a19c]">
-        <div className="flex flex-wrap flex-row gap-3">
+        <div className="flex flex-row flex-wrap gap-3">
           {sources.length > 0 ? (
             sources.map((source, index) => (
               <a
                 key={index}
-                href={`/player/${encodeURIComponent(source.link)}`}
+                href={source.link.includes('https') ? `https://sportstream.mn/player/${encodeURIComponent(source.link)}` : `http://sportstream.mn/player/${encodeURIComponent(source.link)}`}
                 className="px-4 py-2 min-w-[97px] bg-[#2d2f2f] hover:bg-[#a4a19c] hover:text-black transition-all duration-150 rounded-3xl"
               >
                 Source {index + 1}
