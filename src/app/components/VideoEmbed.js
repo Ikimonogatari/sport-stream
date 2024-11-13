@@ -79,7 +79,7 @@ const VideoEmbed = ({ src }) => {
 
       <iframe
         loading="lazy"
-        sandbox="allow-scripts allow-same-origin allow-popups"
+        // sandbox="allow-scripts allow-same-origin allow-popups"
         referrerPolicy="no-referrer-when-downgrade"
         // Use proxied URL for iframe source
         src={src}
