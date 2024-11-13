@@ -59,7 +59,7 @@ export default function MatchDetail() {
             sources.map((source, index) => (
               <a
                 key={index}
-                href={source.link.includes('https') ? `https://sportstream.mn/player/${encodeURIComponent(source.link)}` : `http://sportstream.mn/player/${encodeURIComponent(source.link)}`}
+                href={source.link.includes('https') ? `https://sportstream.mn/player/${encodeURIComponent(source.link)}` : `http://t.sportstream.mn/player/${encodeURIComponent(source.link)}`}
                 className="px-4 py-2 min-w-[97px] bg-[#2d2f2f] hover:bg-[#a4a19c] hover:text-black transition-all duration-150 rounded-3xl"
               >
                 Source {index + 1}
