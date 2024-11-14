@@ -9,10 +9,10 @@ export default function Sidebar({
 }) {
   return (
     <div
-      className={`flex flex-col ${className} border-r-[1px] border-[#42524d] px-3`}
+      className={`flex flex-col ${className} border-r-[1px] border-[#42524d] px-3 text-white`}
     >
-      <div className="bg-[#20926d] px-3 py-1">
-        <span className="text-white">Спортын төрлүүд</span>
+      <div className="bg-[#265ea3] px-3 py-1">
+        <span className="font-semibold text-lg">Спортын төрлүүд</span>
       </div>
       <div className="grid grid-cols-3 gap-3 p-3">
         {categories.map((cat) => (
@@ -20,7 +20,7 @@ export default function Sidebar({
             onClick={toggleSidebar}
             href={`/leagues/${cat.name}`}
             key={cat.name}
-            className="rounded-sm flex justify-center items-center px-1 py-2 bg-[#20926d] cursor-pointer"
+            className="rounded-sm flex justify-center items-center px-1 py-2 bg-[#265ea3] cursor-pointer"
           >
             <Image src={cat.icon} width={24} height={24} alt="sports-icon" />
           </Link>

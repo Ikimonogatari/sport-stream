@@ -7,7 +7,7 @@ export default function Player() {
   const source = params?.source;
 
   if (!source) {
-    return <div>No video source provided.</div>;
+    return <div>Видео сурвалж олдсонгүй.</div>;
   }
 
   return (

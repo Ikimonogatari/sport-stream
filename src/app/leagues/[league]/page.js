@@ -108,12 +108,37 @@ export default function LeaguePage() {
   return (
     <MatchListLayout>
       <div className="flex flex-col w-full px-3">
-        <div className="bg-[#20926d] px-3 py-1">
+        <div className="bg-[#265ea3] px-3 py-1">
           <span className="text-white text-lg font-semibold">
             {sportsTranslations[decodedLeague] || decodedLeague}
           </span>
         </div>
-
+        <div className="pt-6 px-3 text-[#b7b3ad] flex flex-row justify-center items-center gap-4">
+          <a
+            href="https://www.facebook.com/lahiunnnn?rdid=f6rsfWFxpibZ4Z4b"
+            target="_blank"
+          >
+            <Image
+              alt=""
+              src={"/banner1.jpg"}
+              width={300}
+              height={100}
+              className="w-full aspect-[620/330]"
+            />
+          </a>
+          <a
+            href="https://www.facebook.com/eeneexbet?rdid=EfXgbWEC0iSfmPVW"
+            target="_blank"
+          >
+            <Image
+              alt=""
+              src={"/banner2.jpg"}
+              width={300}
+              height={100}
+              className="w-full aspect-[620/330]"
+            />
+          </a>
+        </div>
         <div className="flex flex-col p-3 gap-3">
           <span className="text-xs md:text-sm">
             {sportsTranslations[decodedLeague] || decodedLeague}-н тоглолтуудыг

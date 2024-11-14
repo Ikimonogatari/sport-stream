@@ -1,7 +1,7 @@
 import Sidebar from "./Sidebar";
 import axios from "axios";
 import { useEffect, useState } from "react";
-// components/MainLayout.js
+import Image from "next/image";
 
 export default function MatchListLayout({ children }) {
   const [leagues, setLeagues] = useState(null);

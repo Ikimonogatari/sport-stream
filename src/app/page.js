@@ -6,7 +6,7 @@ export default function Home() {
   const router = useRouter();
 
   useEffect(() => {
-    router.push("/leagues/Soccer");
+    router.push("/leagues/NBA");
   }, []);
   return <main className="min-h-screen w-full bg-[#272827] py-10"></main>;
 }

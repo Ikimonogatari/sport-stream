@@ -3,7 +3,7 @@ import Image from "next/image";
 
 function Navbar({ toggleSidebar }) {
   return (
-    <div className="bg-[#20926d] w-full">
+    <div className="bg-[#265ea3] w-full">
       <div className="container mx-auto px-7 py-7 flex flex-row justify-between items-center gap-5 text-sm text-[#c9d6d5]">
         <a href="/" className="text-xl sm:text-2xl font-bold">
           SportStream.mn

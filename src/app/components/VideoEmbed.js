@@ -9,7 +9,7 @@ const VideoEmbed = ({ src }) => {
   useEffect(() => {
     const script = document.createElement("script");
     script.src =
-      "//pl23855745.highrevenuenetwork.com/e9/f2/47/e9f247537df9c3aafa85c68bb9388491.js";
+      "//doubtsuseless.com/80/d3/eb/80d3eb3a17a3f2be3e88604f5447c8e2.js";
     script.type = "text/javascript";
     script.async = true;
 
