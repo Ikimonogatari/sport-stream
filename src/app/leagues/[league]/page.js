@@ -113,10 +113,11 @@ export default function LeaguePage() {
             {sportsTranslations[decodedLeague] || decodedLeague}
           </span>
         </div>
-        <div className="pt-6 px-3 text-[#b7b3ad] flex flex-row justify-center items-center gap-4">
+        <div className="pt-6 px-3 text-[#b7b3ad] flex flex-row items-center gap-4">
           <a
             href="https://www.facebook.com/lahiunnnn?rdid=f6rsfWFxpibZ4Z4b"
             target="_blank"
+            className="w-full"
           >
             <Image
               alt=""
@@ -129,6 +130,7 @@ export default function LeaguePage() {
           <a
             href="https://www.facebook.com/eeneexbet?rdid=EfXgbWEC0iSfmPVW"
             target="_blank"
+            className="w-full"
           >
             <Image
               alt=""

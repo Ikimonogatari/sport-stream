@@ -97,10 +97,7 @@ const VideoEmbed = ({ src }) => {
       ></iframe>
 
       {iframeError && (
-        <p>
-          There was an error loading the video. Please try again later or check
-          your network settings.
-        </p>
+        <p>Видео ачаалахад алдаа гарлаа. Дараа дахин оролдоно уу."</p>
       )}
     </div>
   );

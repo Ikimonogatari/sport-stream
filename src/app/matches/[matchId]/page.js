@@ -35,7 +35,7 @@ export default function MatchDetail() {
     return (
       <div className="min-h-screen w-full bg-[#272827] py-10">
         <div className="bg-[#242525] max-7xl container mx-auto py-7 px-7 text-lg text-[#a4a19c]">
-          Loading...
+          Уншиж байна...
         </div>
       </div>
     );
@@ -45,7 +45,7 @@ export default function MatchDetail() {
     return (
       <div className="min-h-screen w-full bg-[#272827] py-10">
         <div className="bg-[#242525] max-7xl container mx-auto py-7 px-7 text-lg text-[#a4a19c]">
-          No sources found
+          Видео сурвалж олдсонгүй.
         </div>
       </div>
     );
@@ -59,14 +59,25 @@ export default function MatchDetail() {
             sources.map((source, index) => (
               <a
                 key={index}
-                href={source.link.includes('https') ? `https://sportstream.mn/player/${encodeURIComponent(source.link)}` : `http://t.sportstream.mn/player/${encodeURIComponent(source.link)}`}
-                className="px-4 py-2 min-w-[97px] bg-[#2d2f2f] hover:bg-[#a4a19c] hover:text-black transition-all duration-150 rounded-3xl"
+                href={
+                  source.link.includes("https")
+                    ? `https://sportstream.mn/player/${encodeURIComponent(
+                        source.link
+                      )}`
+                    : `http://t.sportstream.mn/player/${encodeURIComponent(
+                        source.link
+                      )}`
+                }
+                className="px-4 py-2 min-w-[83px] bg-[#2d2f2f] hover:bg-[#a4a19c] hover:text-black transition-all duration-150 rounded-3xl"
               >
-                Source {index + 1}
+                Үзэх {index + 1}
               </a>
             ))
           ) : (
-            <span className="text-lg">No sources found yet</span>
+            <span className="text-lg">
+              Одоогоор видео сурвалж олдсонгүй. (Тоглолт эхэлсэн бол 10 секунд
+              хүлээгээд дахин refresh хийнэ үү)
+            </span>
           )}
         </div>
       </div>
