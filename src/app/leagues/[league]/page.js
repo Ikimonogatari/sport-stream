@@ -107,7 +107,7 @@ export default function LeaguePage() {
 
   return (
     <MatchListLayout>
-      <div className="flex flex-col w-full px-3">
+      <div className="flex flex-col w-full">
         <div className="bg-[#265ea3] px-3 py-1">
           <span className="text-white text-lg font-semibold">
             {sportsTranslations[decodedLeague] || decodedLeague}
@@ -141,7 +141,7 @@ export default function LeaguePage() {
             />
           </a>
         </div>
-        <div className="flex flex-col p-3 gap-3">
+        <div className="flex flex-col py-3 sm:p-3 gap-3">
           <span className="text-xs md:text-sm">
             {sportsTranslations[decodedLeague] || decodedLeague}-н тоглолтуудыг
             шууд хүлээн авч үзээрэй. Бид тоглолт бүрд олон стримийн эх сурвалж
@@ -196,7 +196,7 @@ export default function LeaguePage() {
 
                     <div className="flex flex-row items-center gap-3">
                       {m.isLive && (
-                        <span className="text-sm hidden 2xl:block bg-red-600 text-white rounded-full px-3 pb-1">
+                        <span className="text-sm hidden 2xl:block bg-red-600 text-white rounded-full px-3">
                           Шууд
                         </span>
                       )}
