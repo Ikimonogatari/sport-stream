@@ -29,6 +29,9 @@ export default function MatchListLayout({ children }) {
     { name: "Soccer", icon: "/soccer.svg" },
     { name: "Volleyball", icon: "/volleyball.svg" },
     { name: "Basketball", icon: "/basketball.svg" },
+    { name: "Tennis", icon: "/tennis.svg" },
+    { name: "Motorsport", icon: "/racing.svg" },
+    { name: "Hockey", icon: "/hockey.svg" },
   ];
   return (
     <main className="min-h-screen w-full bg-[#272827] sm:py-10">
