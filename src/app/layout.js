@@ -49,7 +49,7 @@ export default function RootLayout({ children }) {
 
   // Track page views for Google Analytics
   useEffect(() => {
-    const GA_MEASUREMENT_ID = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID; // Get Measurement ID from env
+    const GA_MEASUREMENT_ID = "G-H5H3F85W88"; // Hardcoded Google Analytics Measurement ID
 
     if (GA_MEASUREMENT_ID && window.gtag) {
       window.gtag("config", GA_MEASUREMENT_ID, {
@@ -65,7 +65,7 @@ export default function RootLayout({ children }) {
         <Helmet>
           <script
             async
-            src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID}`}
+            src={`https://www.googletagmanager.com/gtag/js?id=G-H5H3F85W88`}
           />
           <script
             dangerouslySetInnerHTML={{
@@ -74,7 +74,7 @@ export default function RootLayout({ children }) {
                 function gtag(){dataLayer.push(arguments);}
                 gtag('js', new Date());
 
-                gtag('config', '${process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID}');
+                gtag('config', 'G-H5H3F85W88');
               `,
             }}
           />
