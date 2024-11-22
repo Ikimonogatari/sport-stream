@@ -7,22 +7,20 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import Sidebar from "./components/Sidebar";
 import { Helmet } from "react-helmet";
+import { usePathname } from "next/navigation"; // To access the current route
 
 const inter = Inter({ subsets: ["latin"] });
-
-// export const metadata = {
-//   title: "SportStream",
-//   description: "Free sport streaming",
-// };
 
 export default function RootLayout({ children }) {
   const [leagues, setLeagues] = useState(null);
   const [sidebarOpen, setSidebarOpen] = useState(false); // State to control sidebar on mobile
+  const pathname = usePathname(); // Hook to get the current route
 
   const toggleSidebar = () => {
     setSidebarOpen((prevState) => !prevState);
   };
 
+  // Fetch leagues (as per your current logic)
   useEffect(() => {
     const fetchLeagues = async () => {
       try {
@@ -42,17 +40,49 @@ export default function RootLayout({ children }) {
     fetchLeagues();
   }, []);
 
+  // Categories for your sidebar
   const categories = [
     { name: "Soccer", icon: "/soccer.svg" },
     { name: "Volleyball", icon: "/volleyball.svg" },
     { name: "Basketball", icon: "/basketball.svg" },
   ];
+
+  // Track page views for Google Analytics
+  useEffect(() => {
+    const GA_MEASUREMENT_ID = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID; // Get Measurement ID from env
+
+    if (GA_MEASUREMENT_ID && window.gtag) {
+      window.gtag("config", GA_MEASUREMENT_ID, {
+        page_path: pathname, // Set current path
+      });
+    }
+  }, [pathname]); // Re-run the effect on route change
+
   return (
     <html lang="en">
-      <body className={`${inter.className} w-full h-full`}>
+      <head>
+        {/* Google Analytics */}
         <Helmet>
-          <title>SportStream - Спортын шууд дамжуулалт</title>
+          <script
+            async
+            src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID}`}
+          />
+          <script
+            dangerouslySetInnerHTML={{
+              __html: `
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){dataLayer.push(arguments);}
+                gtag('js', new Date());
+
+                gtag('config', '${process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID}');
+              `,
+            }}
+          />
         </Helmet>
+
+        <title>SportStream - Спортын шууд дамжуулалт</title>
+      </head>
+      <body className={`${inter.className} w-full h-full`}>
         <Navbar toggleSidebar={toggleSidebar} />
         <div className="flex flex-row min-h-screen">
           <Sidebar
