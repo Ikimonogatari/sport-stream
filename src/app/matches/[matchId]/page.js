@@ -62,10 +62,10 @@ export default function MatchDetail() {
                 href={
                   source.link.includes("https")
                     ? `https://sportstream.mn/player/${encodeURIComponent(
-                        source.link
+                        source.source
                       )}`
                     : `http://t.sportstream.mn/player/${encodeURIComponent(
-                        source.link
+                        source.source
                       )}`
                 }
                 className="px-4 py-2 min-w-[83px] bg-[#2d2f2f] hover:bg-[#a4a19c] hover:text-black transition-all duration-150 rounded-3xl"
